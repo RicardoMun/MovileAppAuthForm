@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+/* import React, {useState} from 'react';
 import {
   Modal,
   StyleSheet,
@@ -12,7 +12,6 @@ import {
 export const Form = ({ModalVisibleForm}) => {
   const [userName, setUserNanme] = useState('');
   const [email, setEmail] = useState('');
-  /* const [selectedDate, setselectedDate] = useState(''); */
   const [age, setAge] = useState('');
 
   return (
@@ -43,4 +42,4 @@ export const Form = ({ModalVisibleForm}) => {
       </SafeAreaView>
     </Modal>
   );
-};
+}; */
