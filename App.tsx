@@ -52,7 +52,7 @@ function App(): JSX.Element {
         </View>
 
         {/* Calendario */}
-        <Text style={styles.baseText}>Fecha de nacimiento</Text>
+        <Text style={styles.baseText}>Fecha de expedición</Text>
         <DatePicker
           style={styles.calendarStyle}
           onSelectedChange={date => setSelectedDate(date)}
