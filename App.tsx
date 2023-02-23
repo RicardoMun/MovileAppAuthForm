@@ -1,131 +1,57 @@
+/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {
   Text,
   StyleSheet,
   View,
-  TextInput,
   Pressable,
-  Modal,
-  TouchableOpacity,
   ScrollView,
+  FlatList,
 } from 'react-native';
-import DatePicker from 'react-native-modern-datepicker';
-/* import {Form} from './src/components/Form'; */
+import {Form} from './src/components/Form';
+import {User} from './src/components/User';
 
 function App(): JSX.Element {
-  const [text, onChangeText] = useState('Text');
+  /* const [text, onChangeText] = useState('Text'); */
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
-  const [modalVisibleForm, setModalVisibleForm] = useState(false);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [gender, setGender] = useState('');
+  const [modalRegistro, setModalRegistro] = useState(false);
+  const [users, setUsers] = useState([]);
+  /* const [modalRegistro, setModalRegistro] = useState(false); */
+  /*  const [selectedDate, setSelectedDate] = useState('');
+      const [modalVisible2, setModalVisible2] = useState(false);
+      const [gender, setGender] = useState('');
+  */
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.baseText}>REGISTRO</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          placeholder={'Nombre(s)'}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          placeholder={'Apellidos(s)'}
-        />
-
-        {/* Sección radio button */}
-        <Text style={styles.baseText}>Género</Text>
-
-        <View style={styles.wrapper}>
-          {['Masculino', 'Femenino'].map(genderSelect => (
-            <View key={genderSelect} style={styles.genderStyle}>
-              <Text style={styles.genderSelectTxtStyle}>{genderSelect}</Text>
-              <TouchableOpacity
-                style={styles.outterRB}
-                onPress={() => setGender(genderSelect)}>
-                {gender === genderSelect && <View style={styles.innerRB} />}
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
-
-        {/* Calendario */}
-        <Text style={styles.baseText}>Fecha de expedición</Text>
-        <DatePicker
-          style={styles.calendarStyle}
-          onSelectedChange={date => setSelectedDate(date)}
-        />
-
-        {/* Sección correo */}
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          placeholder={'Correo electrónico'}
-        />
-
-        {/* Sección botones acc/can */}
-
-        <View style={styles.wrapper}>
-          <Pressable
-            /* onPress={() => setModalVisible(!modalVisible)} */
-            style={styles.btnStyle}>
-            <Text style={styles.btnTxtStyle}>Aceptar</Text>
-          </Pressable>
-          <Pressable
-            /* onPress={() => setModalVisible(!modalVisible)} */
-            style={styles.btnStyle}>
-            <Text style={styles.btnTxtStyle}>Cancelar</Text>
-          </Pressable>
-        </View>
-
+        <Text style={styles.baseText}>INICIAR SESIÓN</Text>
 
         {/* Sección botón1 */}
-        {/* <Pressable
+        <Pressable
           onPress={() => setModalVisible(!modalVisible)}
           onLongPress={() => console.log('Please realese me')}
           style={styles.btnStyle}>
-          <Text style={styles.btnTxtStyle}>iniciar sesión</Text>
-        </Pressable> */}
+          <Text style={styles.btnTxtStyle}>Ingresar</Text>
+        </Pressable>
 
         {/* Sección botón2 */}
-        {/* <Pressable
-          onPress={() =>
-            setTimeout(() => {
-              setModalVisible2(true);
-            }, 2000)
-          }
+        <Pressable
+          onPress={() => setModalRegistro(true)}
           style={styles.btnStyleOrange}>
           <Text style={styles.btnTxtStyle}>Registrarse</Text>
-        </Pressable> */}
-
-        {/* Sección botón para abrir el formulario */}
-        {/* <Pressable
-          onPress={() => setModalVisibleForm(true)}
-          style={styles.btnStyleOrange}>
-          <Text style={styles.btnTxtStyle}>Registrar usuario</Text>
-        </Pressable> */}
-
-        {/* Sección ventana modal */}
-        {/* <Modal animationType="slide" visible={modalVisible}>
-          <Text style={styles.baseTextWitheMode}>Ventana modal</Text>
-          <TextInput
-            style={styles.inputWhiteMode}
-            onChangeText={onChangeText}
-            value={text}
-          />
-          <TextInput
-            style={styles.inputWhiteMode}
-            onChangeText={onChangeText}
-            value={text}
-          />
-        </Modal> */}
-
-        {/* Modal2 */}
-        {/* <Modal animationType="fade" visible={modalVisible2}>
-          <Text>Mostrar por 3 seg</Text>
-        </Modal> */}
+        </Pressable>
+        <Form modalRegistro={modalRegistro} setModalRegistro={setModalRegistro}/>
+          {users.length === 0 ? <Text>No hay usuaruis</Text> :
+            <FlatList
+              data={users}
+              renderItem={({userItem}) => {
+                return (
+                  <User userItem={userItem}></User>
+                );
+              }}
+            />
+          }
       </View>
     </ScrollView>
   );
@@ -140,6 +66,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     marginHorizontal: 16,
+    padding: 20,
+    marginTop: 80,
   },
   baseText: {
     fontSize: 25,
@@ -147,6 +75,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'MountainsofChristmas-Regular',
     color: 'black',
+    marginBottom: 50,
+    marginTop: 50,
   },
   baseTextWitheMode: {
     fontSize: 25,
@@ -169,7 +99,7 @@ const styles = StyleSheet.create({
   btnStyle: {
     backgroundColor: '#2437DA',
     padding: 20,
-    marginTop: 20,
+    marginTop:120,
     marginHorizontal: 10,
     borderRadius: 10,
   },
